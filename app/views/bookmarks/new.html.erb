@@ -1,0 +1,22 @@
+<h1>Bookmarks#new</h1>
+<p>Find me in app/views/bookmarks/new.html.erb</p>
+
+<h1>Add Bookmark to <%= @list.name %></h1>
+
+<%= form_with model: [@list, @bookmark], local: true do |form| %>
+  <div>
+    <%= form.label :movie_id, "Movie" %><br>
+    <%= form.collection_select :movie_id, Movie.all, :id, :title, prompt: "Select a movie" %>
+  </div>
+
+  <div>
+    <%= form.label :comment %><br>
+    <%= form.text_area :comment %>
+  </div>
+
+  <div>
+    <%= form.submit "Add Bookmark" %>
+  </div>
+<% end %>
+
+<%= link_to "Back to List", list_path(@list) %>
