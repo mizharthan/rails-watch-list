@@ -3,15 +3,29 @@
 
 <h1><%= @list.name %></h1>
 
-<h2>Bookmarks</h2>
-<ul>
-  <% @bookmarks.each do |bookmark| %>
-    <li>
-      <%= bookmark.movie.title %> - <%= bookmark.comment %>
-      <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-    </li>
+<div class="mb-4">
+  <% if @list.image.attached? %>
+    <%= image_tag @list.image.variant(resize_to_limit: [800, 400]), class: "img-fluid rounded" %>
+  <% else %>
+    <%= image_tag "default_list_cover.jpg", class: "img-fluid rounded" %> <!-- optional placeholder -->
   <% end %>
-</ul>
+</div>
 
-<%= link_to "Add Bookmark", new_list_bookmark_path(@list) %>
-<%= link_to "Back to Lists", lists_path %>
+<h2>Movies in this List</h2>
+
+<div class="row">
+  <% @list.movies.each do |movie| %>
+    <div class="col-md-3 mb-3">
+      <div class="card h-100">
+        <% if movie.poster.attached? %>
+          <%= image_tag movie.poster.variant(resize_to_limit: [300, 450]), class: "card-img-top" %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= movie.title %></h5>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "Back to Lists", lists_path, class: "btn btn-outline-secondary mt-3" %>

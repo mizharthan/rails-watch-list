@@ -1,17 +1,25 @@
-<h1>Lists#new</h1>
-<p>Find me in app/views/lists/new.html.erb</p>
-
 <h1>New List</h1>
 
-<%= form_with model: @list, local: true do |form| %>
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
+<%= form_with model: @list, local: true, html: { multipart: true } do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %><br>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit "Create List" %>
+  <div class="mb-3">
+    <%= form.label :image, "Upload a cover image", class: "form-label" %>
+    <%= form.file_field :image, class: "form-control" %>
+
+    <% if @list.image.attached? %>
+      <div class="mt-2">
+        <%= image_tag @list.image.variant(resize_to_limit: [200, 200]), class: "img-thumbnail" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit "Create List", class: "btn btn-primary" %>
   </div>
 <% end %>
 
-<%= link_to "Back", lists_path %>
+<%= link_to "Back", lists_path, class: "btn btn-outline-secondary" %>

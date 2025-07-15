@@ -3,12 +3,21 @@
 
 <h1>All Lists</h1>
 
-<ul>
+<div class="row">
   <% @lists.each do |list| %>
-    <li>
-      <%= link_to list.name, list_path(list) %>
-    </li>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <% if list.image.attached? %>
+          <%= image_tag list.image.variant(resize_to_limit: [400, 250]), class: "card-img-top" %>
+        <% else %>
+          <%= image_tag "default_list_cover.jpg", class: "card-img-top" %> <!-- optional placeholder -->
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to list.name, list_path(list) %></h5>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>
 
 <%= link_to "New List", new_list_path %>
