@@ -10,7 +10,7 @@
     <%= form.label :image, "Upload a cover image", class: "form-label" %>
     <%= form.file_field :image, class: "form-control" %>
 
-    <% if @list.image.attached? %>
+    <% if @list.image.attached? && @list.image.variable? %>
       <div class="mt-2">
         <%= image_tag @list.image.variant(resize_to_limit: [200, 200]), class: "img-thumbnail" %>
       </div>
