@@ -8,7 +8,7 @@
     <div class="col-md-4 mb-4">
       <div class="card h-100">
         <% if list.image.attached? %>
-          <%= image_tag list.image.variant(resize_to_limit: [400, 250]), class: "card-img-top" %>
+          <%= image_tag list.image.variant(resize_to_fill: [400, 250]), class: "card-img-top" %>
         <% else %>
           <%= image_tag "default_list_cover.jpg", class: "card-img-top" %> <!-- optional placeholder -->
         <% end %>

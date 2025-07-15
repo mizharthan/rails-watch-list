@@ -7,6 +7,7 @@ class BookmarksController < ApplicationController
 
   def new
     @bookmark = Bookmark.new
+    @movies = Movie.all
   end
 
   def create
@@ -15,6 +16,7 @@ class BookmarksController < ApplicationController
     if @bookmark.save
       redirect_to list_path(@list), notice: "Bookmark was successfully added."
     else
+      flash.now[:alert] = @bookmark.errors.full_messages.join(", ")
       render :new, status: :unprocessable_entity
     end
   end
