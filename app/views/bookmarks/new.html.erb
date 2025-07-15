@@ -1,7 +1,18 @@
 <h1>Bookmarks#new</h1>
 <p>Find me in app/views/bookmarks/new.html.erb</p>
 
-<h1>Add Bookmark to <%= @list.name %></h1>
+<h1>Add Movie to <%= @list.name %></h1>
+
+<% if @bookmark.errors.any? %>
+  <div class="alert alert-danger">
+    <h4><%= pluralize(@bookmark.errors.count, "error") %> prohibited this bookmark from being saved:</h4>
+    <ul>
+      <% @bookmark.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <%= form_with model: [@list, @bookmark], local: true do |form| %>
   <div>
